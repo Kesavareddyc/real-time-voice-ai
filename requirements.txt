@@ -7,3 +7,4 @@ pygame
 speechrecognition
 pydantic
 requests
+python-multipart
