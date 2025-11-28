@@ -1,0 +1,151 @@
+# 🎤 Real-Time Voice Interaction System (Backend)
+
+This repository contains the **backend API** for a Real-Time Voice Interaction System capable of:
+
+* Speech-to-Text (STT)
+* AI response generation (OpenAI Responses API)
+* Text-to-Speech (TTS) for live assistant mode
+* Conversation logging (SQLite)
+* Clean REST API for any frontend
+
+This backend is deployed easily on **Render (Free Tier)**.
+
+---
+
+## 🚀 Features
+
+* **FastAPI** backend
+* **CORS enabled** for frontend communication
+* **OpenAI Responses API** for replying to users
+* **Google STT** via `speech_recognition`
+* **gTTS** for live audio playback (local mode only)
+* **SQLite database** for storing text interactions
+* Modular structure: `brain`, `stt`, `tts`, `db`, `live_assistant`, `integrator`
+
+---
+
+## 📁 Project Structure
+
+```
+backend/
+│── main_app.py
+│── requirements.txt
+│── Procfile
+│── .gitignore
+│── modules/
+│   ├── brain_module.py
+│   ├── stt_module.py
+│   ├── tts_module.py
+│   ├── db_module.py
+│   ├── integrator_module.py
+│   └── live_assistant.py
+│── outputs/
+│── interaction.db
+```
+
+---
+
+## ⚙️ Installation (Local)
+
+```bash
+git clone https://github.com/your-username/your-repo.git
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Create a `.env` file:
+
+```
+OPENAI_API_KEY=your_key_here
+```
+
+---
+
+## ▶️ Run the Backend Locally
+
+```bash
+uvicorn main_app:app --reload --port 9000
+```
+
+Visit API Docs:
+
+```
+http://127.0.0.1:9000/docs
+```
+
+---
+
+## 🌐 Deploy on Render (Free)
+
+### 1️⃣ Push backend to GitHub
+
+Make sure you have:
+
+* `requirements.txt`
+* `Procfile`
+* `.env` in **.gitignore**
+
+### 2️⃣ Create new Render Web Service
+
+* Build Command: `pip install -r requirements.txt`
+* Start Command: `uvicorn main_app:app --host 0.0.0.0 --port $PORT`
+
+### 3️⃣ Add environment variable
+
+Render Dashboard → Environment → Add:
+
+```
+OPENAI_API_KEY=your_key_here
+```
+
+---
+
+## 🔥 API Endpoints
+
+### POST `/respond/`
+
+Send text and get AI reply.
+
+```json
+{
+  "prompt": "Hello"
+}
+```
+
+### POST `/process_audio/`
+
+Upload WAV audio → STT → AI → DB → reply.
+
+### GET `/history/`
+
+Fetch saved conversations.
+
+### GET `/`
+
+Backend health check.
+
+---
+
+## 🎧 Live Assistant (Optional)
+
+Run this locally only (not for deployment):
+
+```bash
+python -m modules.live_assistant
+```
+
+---
+
+## 🔒 Security Notes
+
+* **Do NOT commit `.env`**
+* Render stores API keys securely
+* SQLite database auto-creates on startup
+
+---
+
+
+
+✨ **Your backend is now production-ready!**
