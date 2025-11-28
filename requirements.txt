@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+openai
+gtts
+pygame
+speechrecognition
+pydantic
+requests
